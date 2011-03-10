@@ -1,7 +1,6 @@
 // Copyright (c) 2010 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-var LS_KEY = "reshitmedsl.from";
 
 /**
 Create the context menu menu item.
@@ -16,7 +15,7 @@ Creates a tab with the SL page loaded
 function travel(info, tab) {
 /* travel URL: http://reseplanerare.sl.se/bin/query.exe/sn?sl=1&S=AAAAAAAAAAAAA&Z=BBBBBBBBBBBBB&start=1 (more options possible but this is the basics) */
     var urlbase = "http://reseplanerare.sl.se/bin/query.exe/sn?sl=1&S=";
-    var origin = escape(localStorage[LS_KEY]);
+    var origin = escape(localStorage[LS_KEY_FROM]);
     var destination = escape(info.selectionText); /* TODO trim this? */
 
     if (!origin) {
@@ -28,8 +27,6 @@ function travel(info, tab) {
     }
 
     var url = urlbase + origin + "&Z=" + destination + "&start=1"; /* start=1 gives suggestions */
-
-    gaq.push(['_trackEvent', 'search', 'done']);
-
+    _gaq.push(['_trackEvent', 'search', 'done']);
     chrome.tabs.create({'url': url});
 }
