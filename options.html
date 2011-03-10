@@ -1,0 +1,85 @@
+<!-- stolen w/o shame from Notify's options page. -->
+<html><head>
+		<title>Options for Res hit med SL</title>
+		<style type="text/css">
+			html{
+			  width: 750px;
+			  margin: 50px auto 10px;
+              margin-top:10px;
+			  overflow-x: hidden;
+			  font: 0.90em/1.5em 'Verdana', Arial, sans-serif;
+			  color: #fff;
+			  background: #333;
+			}
+            button { 
+                font-size: 1.15em;
+                -webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+                text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+                border-bottom: 1px solid rgba(0,0,0,0.25);
+                display: inline-block;
+                padding: 7px 10px 8px;
+                margin-right: 20px;
+                color: #fff;
+                background-color: #14568a;
+                text-decoration: none;
+                line-height: 1;
+                border-radius: 5px;
+                position: relative;
+                cursor: pointer;
+                border: medium none;
+            }
+            button:hover { -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.5); }
+			div#meat { color: #333; margin-top: 30px; padding: 15px; background: #fafafa; border-radius: 8px;  -webkit-box-shadow: 3px 3px 5px rgba(0,0,0,0.7); }
+			h1 { text-shadow: 2px 2px 0 #222; margin-left: 10px; font-size: 1.8em; margin-bottom: -10px; }
+			h2 { color: #222; padding: 0; margin-bottom: -10px; text-shadow: none; }
+			ol { margin-top: 20px; }
+			ol li { line-height: 1.5em; margin-bottom: 9px; }
+		</style>
+        <script type="text/javascript">
+        function save_options() {
+            /* TODO incognito mode consideration? */
+            var fromElement = document.getElementById('from');
+            localStorage[LS_KEY_ORIGIN] = fromElement.value;
+
+            var save = document.getElementById("save");
+            save.innerHTML = "Options Saved.";
+            setTimeout(function() {
+                save.innerHTML = "";
+            }, 750);
+        }
+    
+        function restore_options() {
+            var fromElement = document.getElementById('from');
+            if (localStorage[LS_KEY_ORIGIN])
+                fromElement.value = localStorage[LS_KEY_ORIGIN];
+        }
+        </script>
+	</head>
+	
+	<body onload="restore_options()">
+		<h1>Res hit med SL</h1>
+		<div id="meat">
+			<h2>About</h2>
+
+            <p>"Res hit med SL" makes finding your way through Stockholm using Stockholms Lokaltrafik (SL) easier. First, setup your home station/bus stop/address. Then, whenever you find somewhere (an adress or a station) where you want to go, simply <b>select the address or station, right click and choose "Res hit med SL"</b>. You then end up at SL.se with your From and To stations filled in. If you're lucky, you even get to see your itinerary directly. <br /><br />
+            
+            This application has not been approved of by Stockholms Lokaltrafik and is not supported by them in any way, shape or form. If you have any questions about this extension, please <a href="mailto:johan.hilding@gmail.com">email me</a> or reach me at Twitter <a href="http://twitter.com/johanhil">@johanhil</a>. The source code is available at FIXME.
+            </p>
+
+			<h2>Setup</h2>
+            <p>
+            Where do you travel from: <br />
+            <input id="from" style="margin-right:5px">
+            <button id="save" onclick="save_options()">Save</button>
+            </p>
+
+            <h2>Usage</h2>
+            <ol>
+                <li id="setup">Fill in the form above with your starting point (a bus stop, an address, ...), just like you would on SL.se.</li>
+                <li>Select an address or station on any web site you are browsing.</li>
+                <li>Right click.</li>
+                <li>Choose "Res hit med SL" in the menu.</li>
+                <li>Done! SL.se opens up in a new tab with values already filled out and maybe an itinerary.</li>
+            </ol>
+		</div>
+</body></html>
