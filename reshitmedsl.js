@@ -15,13 +15,14 @@ Creates a tab with the SL page loaded
 function travel(info, tab) {
 /* travel URL: http://reseplanerare.sl.se/bin/query.exe/sn?sl=1&S=AAAAAAAAAAAAA&Z=BBBBBBBBBBBBB&start=1 (more options possible but this is the basics) */
     var urlbase = "http://reseplanerare.sl.se/bin/query.exe/sn?sl=1&S=";
-    var origin = escape(localStorage[LS_KEY_FROM]);
+    var origin = escape(localStorage[LS_KEY_ORIGIN]);
     var destination = escape(info.selectionText); /* TODO trim this? */
 
     if (!origin) {
         /* alert the user that s/he has not set a start station */
         /* TODO make this more user-friendly and link the user to
            the options page */
+        chrome.tabs.create({'url': 'options.html'});
         alert("Du har inte ställt in varifrån du vill åka.");
         return;
     }
