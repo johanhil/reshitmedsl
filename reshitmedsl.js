@@ -29,5 +29,7 @@ function travel(info, tab) {
 
     var url = urlbase + origin + "&Z=" + destination + "&start=1"; /* start=1 gives suggestions */
 
+    gaq.push(['_trackEvent', 'search', 'done']);
+
     chrome.tabs.create({'url': url});
 }
