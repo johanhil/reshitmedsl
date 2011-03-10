@@ -1,8 +1,6 @@
 {
   "name": "Res hit med SL",
-  "description": "Allows you to set a starting point and then helps you figure out how to travel to a place using SL (Stockholms Lokaltrafik).
-  
-  Usage: Select an address or station and right click to select \"Res hit med SL\".",
+  "description": "Helps you travel (using Stockholms Lokaltrafik) from your home to any address or station you find on a web page. Simply select an address or station name, right click and select \"Res hit med SL\"",
   "version": "0.1",
   "icons": {
       "16": "icon-16.png"

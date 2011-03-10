@@ -34,7 +34,10 @@
 			h2 { color: #222; padding: 0; margin-bottom: -10px; text-shadow: none; }
 			ol { margin-top: 20px; }
 			ol li { line-height: 1.5em; margin-bottom: 9px; }
+            input { padding: 3px 5px; border-radius: 3px; font-size: 1.05em; }
 		</style>
+
+        <script type="text/javascript" src="constants.js"></script>
         <script type="text/javascript">
         function save_options() {
             /* TODO incognito mode consideration? */
@@ -42,10 +45,10 @@
             localStorage[LS_KEY_ORIGIN] = fromElement.value;
 
             var save = document.getElementById("save");
-            save.innerHTML = "Options Saved.";
-            setTimeout(function() {
-                save.innerHTML = "";
-            }, 750);
+            save.innerHTML = "Saved!";
+            //setTimeout(function() {
+            //    save.innerHTML = "Save";
+            //}, 2500);
         }
     
         function restore_options() {
