@@ -18,7 +18,7 @@ function travel(info, tab) {
     var origin = escape(localStorage[LS_KEY_ORIGIN]);
     var destination = escape(info.selectionText); /* TODO trim this? */
 
-    if (!origin) {
+    if (!origin || typeof origin == 'undefined') { // what is it set to the first time? confuuusion.
         /* alert the user that s/he has not set a start station */
         /* TODO make this more user-friendly and link the user to
            the options page */
