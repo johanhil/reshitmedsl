@@ -1,7 +1,7 @@
 {
   "name": "Res hit med SL",
-  "description": "Helps you travel (using Stockholms Lokaltrafik) from your home to any address or station you find on a web page. Simply select an address or station name, right click and select \"Res hit med SL\"",
-  "version": "0.1",
+  "description": "Select a name of a station, bus stop or an address and easily find your way there using Stockholms Lokaltrafik (SL).",
+  "version": "0.2",
   "icons": {
       "16": "icon-16.png"
       ,"48": "icon-48.png"
@@ -10,7 +10,6 @@
   },
   "permissions": [
     "contextMenus"
-   ,"http://reseplanerare.sl.se"
   ],
   "background_page": "background.html",
   "options_page": "options.html"
