@@ -1,5 +1,5 @@
 /** calls callback with the SL.se url. calls the callback w/ null as only parameter
-    in case of no origin set.
+    in case of no origin set. destination is an object w/ text or id property.
     TODO: Handle other error scenarios?
 */
 function createUrl(destination, callback)
@@ -21,9 +21,16 @@ finding the id's are done through the suggestion feature on sl.se - see suggesti
 
     var url = base + "&" + getOriginParameters();
     
-    suggestions(escape(destination), 1, function (list) {
-        callback(url + "&REQ0JourneyStopsZID=" + list[0].id + "&start=1");
-    });
+    if (destination.hasOwnProperty('id'))
+    {
+        callback(url + "&REQ0JourneyStopsZID=" + destination.id + "&start=1");
+    }
+    else
+    {
+        suggestions(destination.text, 1, function (list) {
+            callback(url + "&REQ0JourneyStopsZID=" + list[0].id + "&start=1");
+        });
+    }
 }
 
 function getOriginParameters()
@@ -44,8 +51,8 @@ function getOriginParameters()
     }
 }
 
-function showSearch (text) {
-    createUrl(text, function (url) {
+function showSearch (input) {
+    createUrl(input, function (url) {
             if (url == null)
             {
                 /* TODO error handling has to be done better than this */

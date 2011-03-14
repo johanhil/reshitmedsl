@@ -4,5 +4,5 @@ chrome.contextMenus.create({'title': 'Res hit med SL'
 
 function travel(info, tab) {
     _gaq.push(['_trackPageview', '/contextmenusearch']);
-    showSearch(info.selectionText);
+    showSearch({'text': info.selectionText});
 }

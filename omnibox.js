@@ -1,11 +1,14 @@
 chrome.omnibox.onInputChanged.addListener(
 function(text, suggest) {
+    if (text.length < 3) /* emulate sl.se behaviour */
+        return;
+
     suggestions(text, 10, function(list)
     {
         var retlist = [];
         for (i in list)
         {
-            reslist.push({content: list[i].value, description: list[i].value});
+            retlist.push({content: list[i].value, description: list[i].value + ' <dim>' + list[i].typeStr + '</dim>'});
         }
 
         suggest(retlist);
@@ -16,6 +19,6 @@ function(text, suggest) {
 chrome.omnibox.onInputEntered.addListener(
     function(text) {
         _gaq.push(['_trackPageview', '/omniboxsearch']);
-        showSearch(text);
+        showSearch({'text': text});
     }
 );
