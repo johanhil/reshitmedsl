@@ -38,11 +38,17 @@
 		</style>
 
         <script type="text/javascript" src="constants.js"></script>
+        <script type="text/javascript" src="suggestions.js"></script>
         <script type="text/javascript">
         function save_options() {
             /* TODO incognito mode consideration? */
             var fromElement = document.getElementById('from');
             localStorage[LS_KEY_ORIGIN] = fromElement.value;
+
+            suggestions(fromElement.value, 1, function(suggestion_list) {
+                if (suggestion_list && suggestion_list.length > 0)
+                    localStorage[LS_KEY_ORIGIN_ID] = suggestion_list[0].id;
+            });
 
             var save = document.getElementById("save");
             save.innerHTML = "Saved!";
