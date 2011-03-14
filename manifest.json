@@ -1,7 +1,7 @@
 {
   "name": "Res hit med SL",
-  "description": "Select a name of a station, bus stop or an address and easily find your way there using Stockholms Lokaltrafik (SL).",
-  "version": "0.22",
+  "description": "Helps you find your way through Stockholm using Stockholms Lokaltrafik (SL).",
+  "version": "0.3",
   "icons": {
       "16": "icon-16.png"
       ,"48": "icon-48.png"
