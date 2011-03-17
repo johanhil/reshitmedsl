@@ -39,6 +39,7 @@
 
         <script type="text/javascript" src="constants.js"></script>
         <script type="text/javascript" src="suggestions.js"></script>
+        <script type="text/javascript" src="geocoding.js"></script>
         <script type="text/javascript">
         function save_options() {
             /* TODO incognito mode consideration? */
@@ -52,9 +53,6 @@
 
             var save = document.getElementById("save");
             save.innerHTML = "Saved!";
-            //setTimeout(function() {
-            //    save.innerHTML = "Save";
-            //}, 2500);
         }
     
         function restore_options() {
@@ -62,11 +60,26 @@
             if (localStorage[LS_KEY_ORIGIN])
                 fromElement.value = localStorage[LS_KEY_ORIGIN];
         }
+
+        function addresserror ()
+        {
+            alert("Sorry, could not determine your position.");
+        }
+
+        function set_address() {
+            var fromElement = document.getElementById('from');
+            navigator.geolocation.getCurrentPosition(function (position) {
+                get_address(position.coords.latitude, position.coords.longitude, function (address) { // just set the address when it's reverse geocoded.
+                    if (address != null)
+                        fromElement.value = address;
+                    else 
+                        addresserror();
+                });
+            }, addresserror);
+        } 
         </script>
 	</head>
 
-    <!-- in case we need auto completion in the future: reseplanerare.sl.se/bin/ajax-getstop.exe/sn?getstop=1&REQ0JourneyStopsB=10&REQ0JourneyStopsS0A=255&S=thor%20?&js=true& -->
-	
 	<body onload="restore_options()">
 		<h1>Res hit med SL</h1>
 		<div id="meat">
@@ -81,6 +94,7 @@
             <p>
             Where do you travel from: <br />
             <input id="from" style="margin-right:5px">
+            <button id="getaddr" style="margin-right: 5px"  onclick="set_address()">Get my address</button>
             <button id="save" onclick="save_options()">Save</button><br />
             <small>NB: Currently, addresses are not handled very well.</small>
             </p>
