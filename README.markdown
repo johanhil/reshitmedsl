@@ -6,5 +6,4 @@ It's very much a work in progress and I imagine there are possibilites that go b
 
 TODO
 ===============================================
-- Use the geolocation API.
-- Figure out a way to make addresses work (both as origin and destination).
+- Use the geolocation API per default, and fallback in a nice way to using addresses. 
