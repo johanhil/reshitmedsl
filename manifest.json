@@ -1,7 +1,7 @@
 {
   "name": "Res hit med SL",
   "description": "Helps you find your way through Stockholm using Stockholms Lokaltrafik (SL).",
-  "version": "4",
+  "version": "5",
   "icons": {
       "16": "icon-16.png"
       ,"48": "icon-48.png"

@@ -12,9 +12,8 @@ finding the id's are done through the suggestion feature on sl.se - see suggesti
 */
     var base = "http://reseplanerare.sl.se/bin/query.exe/sn?sl=1" 
     
-//    navigator.geolocation.getCurrentPosition(function (position) {
-//        get_address(position.coords.latitude, position.coords.longitude, function (address) { 
-    get_address(59.3751767, 17.9393162, function (address) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+        get_address(position.coords.latitude, position.coords.longitude, function (address) { 
             /* w/o origin, present the user w/ SL.se with an empty From field */
             if (address == undefined)
             {
@@ -38,14 +37,14 @@ finding the id's are done through the suggestion feature on sl.se - see suggesti
                 });
             }
         });
-    /*}, 
+    }, 
     function (error) {
         _gaq.push(['_trackPageview', '/geolocation/error/' + error.code]);
         if (error.code == PositionError.PERMISSION_DENIED)
             alert('The plugin is not allowed to determine your position! Whyyyy :\'(');
 
         alert('Error determining position: Code ' + error.code + ' and message is ' + error.message);
-    });*/
+    });
 }
 
 function showSearch (input) {
