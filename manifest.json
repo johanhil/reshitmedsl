@@ -1,7 +1,7 @@
 {
   "name": "Res hit med SL",
   "description": "Helps you find your way through Stockholm using Stockholms Lokaltrafik (SL).",
-  "version": "0.333",
+  "version": "4",
   "icons": {
       "16": "icon-16.png"
       ,"48": "icon-48.png"
@@ -11,6 +11,8 @@
   "omnibox": { "keyword": "sl" },
   "permissions": [
     "contextMenus"
+    ,"geolocation"
+    ,"tabs"
     ,"http://reseplanerare.sl.se/"
   ],
   "background_page": "background.html",

@@ -1,7 +1,10 @@
 chrome.omnibox.onInputChanged.addListener(
 function(text, suggest) {
-    if (text.length < 3) /* emulate sl.se behaviour */
+    /*
+    emulates sl behaviour
+    if (text.length < 3)
         return;
+    */
 
     suggestions(text, 10, function(list)
     {

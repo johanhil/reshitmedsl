@@ -40,68 +40,21 @@
         <script type="text/javascript" src="constants.js"></script>
         <script type="text/javascript" src="suggestions.js"></script>
         <script type="text/javascript" src="geocoding.js"></script>
-        <script type="text/javascript">
-        function save_options() {
-            /* TODO incognito mode consideration? */
-            var fromElement = document.getElementById('from');
-            localStorage[LS_KEY_ORIGIN] = fromElement.value;
-
-            suggestions(fromElement.value, 1, function(suggestion_list) {
-                if (suggestion_list && suggestion_list.length > 0)
-                    localStorage[LS_KEY_ORIGIN_ID] = suggestion_list[0].id;
-            });
-
-            var save = document.getElementById("save");
-            save.innerHTML = "Saved!";
-        }
-    
-        function restore_options() {
-            var fromElement = document.getElementById('from');
-            if (localStorage[LS_KEY_ORIGIN])
-                fromElement.value = localStorage[LS_KEY_ORIGIN];
-        }
-
-        function addresserror ()
-        {
-            alert("Sorry, could not determine your position.");
-        }
-
-        function set_address() {
-            var fromElement = document.getElementById('from');
-            navigator.geolocation.getCurrentPosition(function (position) {
-                get_address(position.coords.latitude, position.coords.longitude, function (address) { // just set the address when it's reverse geocoded.
-                    if (address != null)
-                        fromElement.value = address;
-                    else 
-                        addresserror();
-                });
-            }, addresserror);
-        } 
-        </script>
 	</head>
 
-	<body onload="restore_options()">
+	<body>
 		<h1>Res hit med SL</h1>
 		<div id="meat">
 			<h2>About</h2>
 
-            <p>"Res hit med SL" makes finding your way through Stockholm using Stockholms Lokaltrafik (SL) easier. First, setup your home station/bus stop/address. Then, whenever you find somewhere (an adress or a station) where you want to go, simply <b>select the address or station, right click and choose "Res hit med SL"</b>. You then end up at SL.se with your From and To stations filled in. If you're lucky, you even get to see your itinerary directly. <br /><br />
+            <p>"Res hit med SL" makes finding your way through Stockholm using Stockholms Lokaltrafik (SL) easier. 
+            The easiest way to use it is to select your address bar (Omnibox) and type "sl" and then space. Then you can type where you want to go and press enter.
             
             This application has not been approved of by Stockholms Lokaltrafik and is not supported by them in any way, shape or form. If you have any questions about this extension, please <a href="mailto:johan.hilding@gmail.com">email me</a> or reach me at Twitter <a href="http://twitter.com/johanhil">@johanhil</a>. The source code is available at <a href="https://github.com/johanhil/reshitmedsl">github.com/johanhil/reshitmedsl</a>.
             </p>
 
-			<h2>Setup</h2>
-            <p>
-            Where do you travel from: <br />
-            <input id="from" style="margin-right:5px">
-            <button id="getaddr" style="margin-right: 5px"  onclick="set_address()">Get my address</button>
-            <button id="save" onclick="save_options()">Save</button><br />
-            <small>NB: Currently, addresses are not handled very well.</small>
-            </p>
-
             <h2>Usage (right click / context)</h2>
             <ol>
-                <li id="setup">Fill in the form above with your starting point (a bus stop, an address, ...), just like you would on SL.se.</li>
                 <li>Select an address or station on any web site you are browsing.</li>
                 <li>Right click.</li>
                 <li>Choose "Res hit med SL" in the menu.</li>

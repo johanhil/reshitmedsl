@@ -10,58 +10,48 @@ the text parameters to query.exe are S (origin) and Z (destionation).
 the id parameters are REQ0JourneyStopsSID (origin) and REQ0JourneyStopsZID (destination).
 finding the id's are done through the suggestion feature on sl.se - see suggestions.js.
 */
-
     var base = "http://reseplanerare.sl.se/bin/query.exe/sn?sl=1" 
-    var originparams = getOriginParameters();
-    if (originparams == null)
-    {
-        callback(null);
-        return;
-    }
-
-    var url = base + "&" + getOriginParameters();
     
-    if (destination.hasOwnProperty('id'))
-    {
-        callback(url + "&REQ0JourneyStopsZID=" + destination.id + "&start=1");
-    }
-    else
-    {
-        suggestions(destination.text, 1, function (list) {
-            callback(url + "&REQ0JourneyStopsZID=" + list[0].id + "&start=1");
+//    navigator.geolocation.getCurrentPosition(function (position) {
+//        get_address(position.coords.latitude, position.coords.longitude, function (address) { 
+    get_address(59.3751767, 17.9393162, function (address) {
+            /* w/o origin, present the user w/ SL.se with an empty From field */
+            if (address == undefined)
+            {
+                _gaq.push(['_trackPageview', '/failed_to_get_address']);
+                best_suggestion_id(destination.text, function (destination_id) {
+                    callback(base + 
+                        "&REQ0JourneyStopsZID=" + escape(destination_id) + 
+                        "&start=0");
+                    });
+            }
+            else
+            {
+                /* find origin and destination id */
+                best_suggestion_id(address, function (origin_id) {
+                    best_suggestion_id(destination.text, function (destination_id) {
+                        callback(base + 
+                            "&REQ0JourneyStopsZID=" + escape(destination_id) +
+                            "&REQ0JourneyStopsSID=" + escape(origin_id) +
+                            "&start=1");
+                    });
+                });
+            }
         });
-    }
-}
+    /*}, 
+    function (error) {
+        _gaq.push(['_trackPageview', '/geolocation/error/' + error.code]);
+        if (error.code == PositionError.PERMISSION_DENIED)
+            alert('The plugin is not allowed to determine your position! Whyyyy :\'(');
 
-function getOriginParameters()
-{
-    /* is the string set? if not, we need the user to set the string */
-    if (! localStorage.hasOwnProperty(LS_KEY_ORIGIN))
-        return null;
-
-    var id = localStorage[LS_KEY_ORIGIN_ID];
-    if (typeof id == undefined || !id)
-    {
-        /* no id, use the string */
-        return "S=" + escape(localStorage[LS_KEY_ORIGIN]);
-    }
-    else
-    {
-        return "REQ0JourneyStopsSID=" + escape(id);
-    }
+        alert('Error determining position: Code ' + error.code + ' and message is ' + error.message);
+    });*/
 }
 
 function showSearch (input) {
     createUrl(input, function (url) {
-            if (url == null)
-            {
-                /* TODO error handling has to be done better than this */
-                chrome.tabs.create({'url': 'options.html'});
-                alert("Du har inte ställt in varifrån du vill åka.");
-                return;
-            }
-
-            chrome.tabs.create({'url': url});
-        }
-    );
+        chrome.tabs.getSelected(null, function(tab) {
+            chrome.tabs.update(tab.id, {'url': url});
+        });
+    });
 }

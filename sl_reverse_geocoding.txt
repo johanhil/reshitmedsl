@@ -1,9 +1,9 @@
 This document describes the URL format of SL's reverse geocoding feature that they use in their "Välj från karta" feature.
 
 The URL is in this format:
-http://reseplanerare.sl.se/bin/query.exe/sny?performLocating=512&tpl=reverselookup2json&look_nv=type|reverselookup|radius|500|get_addressid|yes|get_addresscoord|yes|x|17956276|y|59322003
+http://reseplanerare.sl.se/bin/query.exe/sny?performLocating=512&tpl=reverselookup2json&look_nv=type|reverselookup|radius|500|get_addressid|yes|get_addresscoord|yes|x|17885734|y|59365913
 
-The method used to fetch the data is POST on sl.se, but I have had success with GET as well.
+The method used to fetch the data is GET, maybe POST works as well.
 
 It should be pretty self-explanatory. The result is on this format:
 {
@@ -19,3 +19,4 @@ It should be pretty self-explanatory. The result is on this format:
 }
 
 To exclude addressx and addressy, change the |yes| after addresscoord to |no|. The same goes for get_addressid.
+

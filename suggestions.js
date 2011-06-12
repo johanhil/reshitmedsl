@@ -21,3 +21,18 @@ function suggestions(str, num, callback) {
     req.send(null);
     return;
 }
+
+/**
+Returns the id for the #1 suggestion. If no suggestion was found, nothing
+happens.
+*/
+function best_suggestion_id(str, callback) {
+    suggestions(str, 1, function(suggestion_list) {
+        if (suggestion_list && suggestion_list.length > 0) {
+            callback(suggestion_list[0].id);
+        } else {
+            callback('');
+        }
+    });
+}
+
